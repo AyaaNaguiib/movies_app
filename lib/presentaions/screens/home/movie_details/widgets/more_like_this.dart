@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:movies_app/core/colors_manager.dart';
 import '../movie__details.dart';
 
 
@@ -59,7 +59,7 @@ class MoreLikeThis extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 14.sp,
-                            color: Colors.white,
+                            color: ColorsManager.white,
                           ),
                         ),
                       ],

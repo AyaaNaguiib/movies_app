@@ -200,10 +200,11 @@ class _HomeState extends State<Home> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Container(
+        width: double.infinity,
         padding: EdgeInsets.all(12.w),
         decoration: BoxDecoration(
           color: ColorsManager.grey,
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: BorderRadius.circular(5.r),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

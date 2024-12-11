@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/core/colors_manager.dart';
 import '../movie__details.dart';
 
-
 class MoreLikeThis extends StatelessWidget {
   final Future<List<dynamic>> similarMoviesFuture;
   const MoreLikeThis({Key? key, required this.similarMoviesFuture})
@@ -22,51 +21,115 @@ class MoreLikeThis extends StatelessWidget {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else {
           final movies = snapshot.data!;
-          return SizedBox(
-            height: 200.h,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: movies.length,
-              itemBuilder: (context, index) {
-                final movie = movies[index];
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MovieDetails(movieId: movie['id']),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    width: 120.w,
-                    margin: EdgeInsets.only(left: 16.w),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8.r),
-                          child: Image.network(
-                            "$baseUrl${movie['poster_path']}",
-                            height: 150.h,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        SizedBox(height: 5.h),
-                        Text(
-                          movie['title'],
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            color: ColorsManager.white,
-                          ),
-                        ),
-                      ],
-                    ),
+          return Container(
+            width: double.infinity,
+            margin: EdgeInsets.symmetric(horizontal: 0),
+            padding: EdgeInsets.all(10.w),
+            decoration: BoxDecoration(
+              color: ColorsManager.grey,
+              borderRadius: BorderRadius.circular(5.r),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "More Like This",
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.bold,
+                    color: ColorsManager.white,
                   ),
-                );
-              },
+                ),
+                SizedBox(height: 10.h),
+                SizedBox(
+                  height: 220.h,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: movies.length,
+                    itemBuilder: (context, index) {
+                      final movie = movies[index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  MovieDetails(movieId: movie['id']),
+                            ),
+                          );
+                        },
+                        child: Card(
+                          margin: EdgeInsets.only(right: 5.w),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          elevation: 3,
+                          color: ColorsManager.recommendedCard,
+                          child: Container(
+                            width: 120.w,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(8.r),
+                                    topRight: Radius.circular(8.r),
+                                  ),
+                                  child: Image.network(
+                                    "$baseUrl${movie['poster_path']}",
+                                    height: 150.h,
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(8.w),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.star,
+                                            size: 14.sp,
+                                            color: ColorsManager.yellow,
+                                          ),
+                                          SizedBox(width: 5.w),
+                                          Text(
+                                            movie['vote_average']
+                                                .toStringAsFixed(1),
+                                            style: TextStyle(
+                                              fontSize: 12.sp,
+                                              color: ColorsManager.white,
+                                            ),
+                                          ),
+
+                                        ],
+                                      ),
+                                      SizedBox(height: 5.h),
+                                      Text(
+                                        movie['title'],
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.bold,
+                                          color: ColorsManager.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           );
         }

@@ -24,16 +24,16 @@ class SearchResultItem extends StatelessWidget {
             child: movie['poster_path'] != null
                 ? Image.network(
               "$baseUrl${movie['poster_path']}",
-              width: 60.w,
+              width: 110.w,
               height: 90.h,
-              fit: BoxFit.cover,
+              fit: BoxFit.fitWidth,
             )
                 : Container(
-              width: 60.w,
+              width: 110.w,
               height: 90.h,
-              color: Colors.grey[800],
+              color: ColorsManager.grey,
               child: Icon(Icons.movie,
-                  color: Colors.grey[600], size: 40.sp),
+                  color: ColorsManager.localMoviesIcon, size: 40.sp),
             ),
           ),
           SizedBox(width: 10.w),
@@ -55,7 +55,7 @@ class SearchResultItem extends StatelessWidget {
                 Text(
                   movie['release_date']?.split('-')[0] ?? 'Unknown Year',
                   style: TextStyle(
-                    color: Colors.grey[500],
+                    color: ColorsManager.white.withOpacity(0.67),
                     fontSize: 14.sp,
                   ),
                 ),
@@ -67,3 +67,4 @@ class SearchResultItem extends StatelessWidget {
     );
   }
 }
+

@@ -6,7 +6,7 @@ import 'package:movies_app/core/assets_manager.dart';
 import 'package:movies_app/presentaions/screens/home/tabs/browse_screen/browse.dart';
 import 'package:movies_app/presentaions/screens/home/tabs/search/search.dart';
 import 'package:movies_app/presentaions/screens/home/tabs/watchlist_screen/watchlist.dart';
-import 'API_home_Screen/API.dart';
+import '../../../API/API.dart';
 import 'cards/newrelease.dart';
 import 'cards/recommended.dart';
 import 'movie_details/movie__details.dart';
@@ -28,11 +28,10 @@ class _HomeState extends State<Home> {
     data = ApiService.fetchData();
     _pageController = PageController(viewportFraction: 1.0);
 
-    // Auto-scroll timer
     _timer = Timer.periodic(Duration(seconds: 3), (timer) {
       if (_pageController.hasClients) {
         int nextPage = _pageController.page!.toInt() + 1;
-        if (nextPage >= 5) { // Assuming there are 5 movies
+        if (nextPage >= 10) {
           nextPage = 0;
         }
         _pageController.animateToPage(
@@ -51,11 +50,6 @@ class _HomeState extends State<Home> {
     super.dispose();
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   data = ApiService.fetchData();
-  // }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -77,9 +71,9 @@ class _HomeState extends State<Home> {
         index: _selectedIndex,
         children: [
           _buildHomeScreen(),
-          const SearchScreen(),
-          const BrowseCategoriesScreen(),
-          const WatchlistScreen(),
+           SearchScreen(),
+           BrowseCategoriesScreen(),
+          WatchListScreen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -166,14 +160,14 @@ class _HomeState extends State<Home> {
           final movie = newReleases[index];
           return Stack(
             children: [
-              // Background Poster Image
+
               Image.network(
                 "${ApiService.baseUrl}${movie['backdrop_path']}",
                 width: MediaQuery.of(context).size.width,
                 height: 240.h,
                 fit: BoxFit.cover,
               ),
-              // Gradient Overlay
+
               Container(
                 height: 300.h,
                 width: MediaQuery.of(context).size.width,
@@ -190,7 +184,7 @@ class _HomeState extends State<Home> {
                 left: 16.w,
                 child: Stack(
                   children: [
-                    // Movie Poster
+
                     ClipRRect(
                       borderRadius: BorderRadius.circular(12.r),
                       child: Image.network(
@@ -207,8 +201,8 @@ class _HomeState extends State<Home> {
                         onTap: toggleAddState,
                         child: Image.asset(
                           isAdded
-                              ? 'assets/images/bookmark (1).png'
-                              : 'assets/images/bookmark.png',
+                              ? AssetsManager.searchIcon
+                              : AssetsManager.addIcon,
                           height: 32.h,
                           width: 24.w,
                           fit: BoxFit.contain,
@@ -316,4 +310,6 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
+
 

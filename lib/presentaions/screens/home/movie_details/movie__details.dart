@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_app/presentaions/screens/home/movie_details/widgets/movie_details_API.dart';
+import 'package:movies_app/API/movie_details_API.dart';
 import 'package:movies_app/presentaions/screens/home/movie_details/widgets/more_like_this.dart';
 import 'package:movies_app/presentaions/screens/home/movie_details/widgets/movie_info.dart';
 import 'package:movies_app/presentaions/screens/home/movie_details/widgets/overview.dart';
@@ -106,3 +106,4 @@ class _MovieDetailsState extends State<MovieDetails> {
     );
   }
 }
+

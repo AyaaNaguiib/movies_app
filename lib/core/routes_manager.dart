@@ -23,7 +23,7 @@ class RoutesManager {
         return MaterialPageRoute(builder: (context)=> SearchScreen()
         );
       case watchList:
-        return MaterialPageRoute(builder: (context)=> WatchlistScreen()
+        return MaterialPageRoute(builder: (context)=> WatchListScreen()
         );
 
     }

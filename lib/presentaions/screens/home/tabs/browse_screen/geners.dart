@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/core/colors_manager.dart';
 import 'package:movies_app/presentaions/screens/home/tabs/search/search_result.dart';
-import 'categories_service.dart';
+import '../../../../../API/categories_service.dart';
 
 class MoviesByGenreScreen extends StatelessWidget {
   final int genreId;

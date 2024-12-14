@@ -7,10 +7,8 @@ class MovieService {
   static const String baseUrl = "https://api.themoviedb.org/3";
   static FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  // Local in-memory watchlist for quick access
   static final List<Map<String, dynamic>> _watchlist = [];
 
-  // Fetch movie details from the API
   static Future<Map<String, dynamic>> fetchMovieDetails(int movieId) async {
     try {
       final response = await http.get(
@@ -27,7 +25,6 @@ class MovieService {
     }
   }
 
-  // Fetch similar movies from the API
   static Future<List<dynamic>> fetchSimilarMovies(int movieId) async {
     try {
       final response = await http.get(
@@ -44,14 +41,13 @@ class MovieService {
     }
   }
 
-  // Add movie to Firestore watchlist
   static Future<void> addToWatchlist(Map<String, dynamic> movie) async {
-    // Ensure fields are strings
+
     final movieId = movie['id']?.toString() ?? '';
     final movieTitle = movie['title'] ?? 'Unknown Title';
-    final movieRating = movie['rating']?.toString() ?? '0.0'; // Convert rating to string
+    final movieRating = movie['rating']?.toString() ?? '0.0';
     final movieImageUrl = movie['imageUrl'] ?? '';
-    final movieRuntime = movie['runtime']?.toString() ?? 'N/A'; // Convert runtime to string
+    final movieRuntime = movie['runtime']?.toString() ?? 'N/A';
 
     if (movieId.isEmpty) {
       throw Exception('Movie ID is null or empty');
@@ -61,36 +57,33 @@ class MovieService {
     await watchlistRef.set({
       'id': movieId,
       'title': movieTitle,
-      'rating': movieRating, // Ensure it's a string
+      'rating': movieRating,
       'imageUrl': movieImageUrl,
-      'runtime': movieRuntime, // Ensure it's a string
+      'runtime': movieRuntime,
     });
 
-    // Optionally, update the local in-memory watchlist
     if (!_watchlist.any((item) => item['id'] == movieId)) {
       _watchlist.add(movie);
     }
   }
 
-  // Remove movie from Firestore watchlist
   static Future<void> removeFromWatchlist(int movieId) async {
     if (movieId <= 0) {
       throw Exception('Invalid movie ID');
     }
     await firestore.collection('watchlist').doc(movieId.toString()).delete();
 
-    // Optionally, remove from the local in-memory watchlist
+
     _watchlist.removeWhere((item) => item['id'] == movieId);
   }
 
-  // Fetch movies from Firestore watchlist
   static Future<List<Map<String, dynamic>>> fetchWatchlist() async {
     try {
       QuerySnapshot snapshot = await firestore.collection('watchlist').get();
       return snapshot.docs
           .map((doc) => doc.data() as Map<String, dynamic>)
           .map((data) {
-        // Check for null values in fields and ensure everything is a String
+
         return {
           'id': data['id'] ?? '',
           'title': data['title'] ?? 'Unknown Title',
@@ -104,7 +97,6 @@ class MovieService {
     }
   }
 
-  // Fetch movies from the local watchlist
   static List<Map<String, dynamic>> getLocalWatchlist() {
     return _watchlist;
   }

@@ -6,14 +6,7 @@ class CategoryService {
   static const String baseUrl = "https://api.themoviedb.org/3";
   static const String imageUrl = "https://image.tmdb.org/t/p/w500";
 
-  static const Map<String, String> genreImages = {
-    // 'Action': 'assets/images/action.jpg',
-    // 'Comedy': 'assets/images/comedy.jpg',
-    // 'Drama': 'assets/images/drama.jpg',
-    // 'Horror': 'assets/images/horror.jpg',
-    // 'Science Fiction': 'assets/images/scifi.jpg',
-    // 'Default': 'assets/images/default.jpg',
-  };
+  static const Map<String, String> genreImages = {};
 
   static Future<List<Map<String, dynamic>>> fetchGenres() async {
     final response = await http.get(

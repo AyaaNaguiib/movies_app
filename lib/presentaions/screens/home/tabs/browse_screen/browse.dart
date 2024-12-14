@@ -3,7 +3,7 @@ import 'package:movies_app/core/assets_manager.dart';
 import 'package:movies_app/core/colors_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'categories_service.dart';
+import '../../../../../API/categories_service.dart';
 import 'geners.dart';
 
 class BrowseCategoriesScreen extends StatefulWidget {

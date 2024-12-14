@@ -6,4 +6,5 @@ class AssetsManager {
   static const String searchIcon = '$base/search-2.png';
   static const String browseIcon = '$base/Icon material-movie.png';
   static const String watchListIcon = '$base/watchlist.png';
+  static const String categoryItem = '$base/category.png';
 }

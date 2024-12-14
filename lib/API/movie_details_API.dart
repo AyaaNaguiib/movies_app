@@ -1,35 +1,3 @@
-// import 'dart:convert';
-// import 'package:http/http.dart' as http;
-//
-// class MovieService {
-//   static const String apiKey = "48c9c8777253bd8945c7d1da1a02653d";
-//   static const String baseUrl = "https://api.themoviedb.org/3";
-//
-//   static Future<Map<String, dynamic>> fetchMovieDetails(int movieId) async {
-//     final response = await http.get(
-//       Uri.parse('$baseUrl/movie/$movieId?api_key=$apiKey'),
-//     );
-//
-//     if (response.statusCode == 200) {
-//       return json.decode(response.body);
-//     } else {
-//       throw Exception('Failed to load movie details');
-//     }
-//   }
-//
-//   static Future<List<dynamic>> fetchSimilarMovies(int movieId) async {
-//     final response = await http.get(
-//       Uri.parse('$baseUrl/movie/$movieId/similar?api_key=$apiKey'),
-//     );
-//
-//     if (response.statusCode == 200) {
-//       return json.decode(response.body)['results'];
-//     } else {
-//       throw Exception('Failed to load similar movies');
-//     }
-//   }
-// }
-
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -78,12 +46,12 @@ class MovieService {
 
   // Add movie to Firestore watchlist
   static Future<void> addToWatchlist(Map<String, dynamic> movie) async {
-    // Ensuring that all fields are checked for null before adding to Firestore
+    // Ensure fields are strings
     final movieId = movie['id']?.toString() ?? '';
     final movieTitle = movie['title'] ?? 'Unknown Title';
-    final movieRating = movie['rating']?.toString() ?? '0.0';
+    final movieRating = movie['rating']?.toString() ?? '0.0'; // Convert rating to string
     final movieImageUrl = movie['imageUrl'] ?? '';
-    final movieRuntime = movie['runtime']?.toString() ?? 'N/A';
+    final movieRuntime = movie['runtime']?.toString() ?? 'N/A'; // Convert runtime to string
 
     if (movieId.isEmpty) {
       throw Exception('Movie ID is null or empty');
@@ -93,9 +61,9 @@ class MovieService {
     await watchlistRef.set({
       'id': movieId,
       'title': movieTitle,
-      'rating': movieRating,
+      'rating': movieRating, // Ensure it's a string
       'imageUrl': movieImageUrl,
-      'runtime': movieRuntime,
+      'runtime': movieRuntime, // Ensure it's a string
     });
 
     // Optionally, update the local in-memory watchlist
@@ -122,7 +90,7 @@ class MovieService {
       return snapshot.docs
           .map((doc) => doc.data() as Map<String, dynamic>)
           .map((data) {
-        // Check for null values in fields
+        // Check for null values in fields and ensure everything is a String
         return {
           'id': data['id'] ?? '',
           'title': data['title'] ?? 'Unknown Title',
@@ -141,57 +109,3 @@ class MovieService {
     return _watchlist;
   }
 }
-
-
-// import 'dart:convert';
-// import 'package:http/http.dart' as http;
-// import 'package:cloud_firestore/cloud_firestore.dart';
-//
-// class MovieService {
-//   static const String apiKey = "48c9c8777253bd8945c7d1da1a02653d";
-//   static const String baseUrl = "https://api.themoviedb.org/3";
-//   static FirebaseFirestore firestore = FirebaseFirestore.instance;
-//
-//   // Fetch movie details from the API
-//   static Future<Map<String, dynamic>> fetchMovieDetails(int movieId) async {
-//     final response = await http.get(
-//       Uri.parse('$baseUrl/movie/$movieId?api_key=$apiKey'),
-//     );
-//
-//     if (response.statusCode == 200) {
-//       return json.decode(response.body);
-//     } else {
-//       throw Exception('Failed to load movie details');
-//     }
-//   }
-//
-//   // Fetch similar movies from the API
-//   static Future<List<dynamic>> fetchSimilarMovies(int movieId) async {
-//     final response = await http.get(
-//       Uri.parse('$baseUrl/movie/$movieId/similar?api_key=$apiKey'),
-//     );
-//
-//     if (response.statusCode == 200) {
-//       return json.decode(response.body)['results'];
-//     } else {
-//       throw Exception('Failed to load similar movies');
-//     }
-//   }
-//
-//   // Add movie to Firestore watchlist
-//   static Future<void> addToWatchlist(Map<String, dynamic> movie) async {
-//     final watchlistRef = firestore.collection('watchlist').doc(movie['id'].toString());
-//     await watchlistRef.set(movie); // Add movie to Firestore
-//   }
-//
-//   // Remove movie from Firestore watchlist
-//   static Future<void> removeFromWatchlist(int movieId) async {
-//     await firestore.collection('watchlist').doc(movieId.toString()).delete();
-//   }
-//
-//   // Fetch movies from Firestore watchlist
-//   static Future<List<Map<String, dynamic>>> fetchWatchlist() async {
-//     QuerySnapshot snapshot = await firestore.collection('watchlist').get();
-//     return snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
-//   }
-// }

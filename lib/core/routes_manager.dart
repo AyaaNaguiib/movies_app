@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/presentaions/screens/home/tabs/watchlist_screen/watchlist.dart';
 
 import '../presentaions/screens/home/home.dart';
 import '../presentaions/screens/home/tabs/search/search.dart';
@@ -8,6 +9,7 @@ class RoutesManager {
   static const String splash = '/splash';
   static const String home = '/home';
   static const String search = '/search';
+  static const String watchList = '/watchList';
 
   static Route? router(RouteSettings settings) {
     switch (settings.name) {
@@ -20,6 +22,10 @@ class RoutesManager {
       case search:
         return MaterialPageRoute(builder: (context)=> SearchScreen()
         );
+      case watchList:
+        return MaterialPageRoute(builder: (context)=> WatchlistScreen()
+        );
+
     }
   }
 }

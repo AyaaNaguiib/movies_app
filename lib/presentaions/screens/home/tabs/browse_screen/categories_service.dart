@@ -7,12 +7,12 @@ class CategoryService {
   static const String imageUrl = "https://image.tmdb.org/t/p/w500";
 
   static const Map<String, String> genreImages = {
-    'Action': 'assets/images/action.jpg',
-    'Comedy': 'assets/images/comedy.jpg',
-    'Drama': 'assets/images/drama.jpg',
-    'Horror': 'assets/images/horror.jpg',
-    'Science Fiction': 'assets/images/scifi.jpg',
-    'Default': 'assets/images/default.jpg',
+    // 'Action': 'assets/images/action.jpg',
+    // 'Comedy': 'assets/images/comedy.jpg',
+    // 'Drama': 'assets/images/drama.jpg',
+    // 'Horror': 'assets/images/horror.jpg',
+    // 'Science Fiction': 'assets/images/scifi.jpg',
+    // 'Default': 'assets/images/default.jpg',
   };
 
   static Future<List<Map<String, dynamic>>> fetchGenres() async {

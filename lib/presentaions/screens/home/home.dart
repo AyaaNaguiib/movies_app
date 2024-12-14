@@ -79,7 +79,7 @@ class _HomeState extends State<Home> {
           _buildHomeScreen(),
           const SearchScreen(),
           const BrowseCategoriesScreen(),
-          const WatchlistScreen(),
+           WatchListScreen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

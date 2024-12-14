@@ -7,4 +7,6 @@ class AssetsManager {
   static const String browseIcon = '$base/Icon material-movie.png';
   static const String watchListIcon = '$base/watchlist.png';
   static const String categoryItem = '$base/category.png';
+  static const String addIcon = '$base/bookmark.png';
+  static const String saveIcon = '$base/bookmark (1).png';
 }

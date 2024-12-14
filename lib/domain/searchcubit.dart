@@ -9,14 +9,14 @@ class SearchCubit extends Cubit<SearchState> {
 
   Future<void> searchMovies(String query) async {
     if (query.isEmpty) {
-      emit(SearchLoaded([], imageUrl: SearchService.imageUrl)); // Empty results with image URL
+      emit(SearchLoaded([], imageUrl: SearchService.imageUrl));
       return;
     }
 
     try {
       emit(SearchLoading());
       final results = await SearchService.searchMovies(query);
-      emit(SearchLoaded(results, imageUrl: SearchService.imageUrl)); // Pass image URL
+      emit(SearchLoaded(results, imageUrl: SearchService.imageUrl));
     } catch (error) {
       emit(SearchError(error.toString()));
     }

@@ -168,9 +168,14 @@
 //     );
 //   }
 // }
+//
+//
+
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_app/core/assets_manager.dart';
 import 'package:movies_app/core/colors_manager.dart';
 import '../movie__details.dart';
 import 'movie_details_API.dart';
@@ -241,6 +246,7 @@ class _MoreLikeThisState extends State<MoreLikeThis> {
                       final isAdded = movieBookmarkState[movie['id']] ?? false; // Check the bookmark state for this movie
                       return GestureDetector(
                         onTap: () {
+                          print(movie['id']);print(movie['rating']);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -322,8 +328,8 @@ class _MoreLikeThisState extends State<MoreLikeThis> {
                                     onTap: () => toggleAddState(movie['id'], movie),
                                     child: Image.asset(
                                       isAdded
-                                          ? 'assets/images/bookmark (1).png'
-                                          : 'assets/images/bookmark.png',
+                                          ? AssetsManager.saveIcon
+                                          : AssetsManager.addIcon,
                                       height: 20.h,
                                       width: 24.w,
                                       fit: BoxFit.contain,

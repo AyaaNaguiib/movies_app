@@ -11,6 +11,7 @@ class RoutesManager {
   static const String home = '/home';
   static const String search = '/search';
   static const String watchList = '/watchList';
+  // static const String movieDetails = '/movieDetails';
 
   static Route? router(RouteSettings settings) {
     switch (settings.name) {

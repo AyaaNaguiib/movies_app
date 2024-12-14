@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/presentaions/screens/home/movie_details/movie__details.dart';
 import 'package:movies_app/presentaions/screens/home/tabs/watchlist_screen/watchlist.dart';
 
 import '../presentaions/screens/home/home.dart';
@@ -23,9 +24,8 @@ class RoutesManager {
         return MaterialPageRoute(builder: (context)=> SearchScreen()
         );
       case watchList:
-        return MaterialPageRoute(builder: (context)=> WatchlistScreen()
+        return MaterialPageRoute(builder: (context)=> WatchListScreen()
         );
-
     }
   }
 }

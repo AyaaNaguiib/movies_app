@@ -1,4 +1,5 @@
-import '../repo/moviemodel.dart';
+
+import '../model/moviemodel.dart';
 
 abstract class WatchlistState {}
 

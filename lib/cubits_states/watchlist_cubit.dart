@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../repo/moviemodel.dart';
-import '../repo/watchlist_Repo.dart';
+import '../model/moviemodel.dart';
+import '../model/watchlist_Repo.dart';
 
 abstract class WatchlistState {}
 

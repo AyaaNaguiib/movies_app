@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 
 import '../API/movie_details_API.dart';
-import 'movie state.dart';
+import 'movie_state.dart';
 
 
 class MovieCubit extends Cubit<MovieState> {

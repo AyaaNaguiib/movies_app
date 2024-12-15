@@ -23,20 +23,32 @@ class WatchlistItem extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 16.h),
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(4.r)),
-            child: Image.network(
-              imageUrl,
-              width: 100.w,
-              height: 130.h,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return const Icon(Icons.error);
-              },
-            ),
+          Stack(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(4.r)),
+                child: Image.network(
+                  imageUrl,
+                  width: 100.w,
+                  height: 130.h,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Icon(Icons.error);
+                  },
+                ),
+              ),
+              Positioned(
+                top: 8.h,
+                left: 8.w,
+                child: Image.asset(
+                  AssetsManager.saveIcon,
+                  width: 24.w,
+                  height: 24.h,
+                ),
+              ),
+            ],
           ),
           SizedBox(width: 10.w),
-
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

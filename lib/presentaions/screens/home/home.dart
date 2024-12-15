@@ -6,7 +6,7 @@ import 'package:movies_app/core/assets_manager.dart';
 import 'package:movies_app/presentaions/screens/home/tabs/browse_screen/browse.dart';
 import 'package:movies_app/presentaions/screens/home/tabs/search/search.dart';
 import 'package:movies_app/presentaions/screens/home/tabs/watchlist_screen/watchlist.dart';
-import '../../../API/API.dart';
+import '../../../API/API_homescreen.dart';
 import 'cards/newrelease.dart';
 import 'cards/recommended.dart';
 import 'movie_details/movie__details.dart';
@@ -73,7 +73,7 @@ class _HomeState extends State<Home> {
           _buildHomeScreen(),
            SearchScreen(),
            BrowseCategoriesScreen(),
-          WatchListScreen(),
+           WatchListScreen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -139,7 +139,7 @@ class _HomeState extends State<Home> {
                     imageUrl: "${ApiService.baseUrl}${movie['poster_path']}",
                     title: movie['title'],
                     rating: movie['vote_average'].toString(),
-                    runtime: "1h 50m", // Placeholder runtime
+                    runtime: "1h 50m",
                     movieId: movie['id'],
                   ),
                 ),
@@ -160,7 +160,6 @@ class _HomeState extends State<Home> {
           final movie = newReleases[index];
           return Stack(
             children: [
-
               Image.network(
                 "${ApiService.baseUrl}${movie['backdrop_path']}",
                 width: MediaQuery.of(context).size.width,
@@ -310,6 +309,5 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
 
 

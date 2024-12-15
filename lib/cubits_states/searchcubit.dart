@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/domain/searchstate.dart';
-
+import 'package:movies_app/cubits_states/searchstate.dart';
 import '../API/API_search.dart';
 
 

@@ -71,12 +71,10 @@ class _MoreLikeThisState extends State<MoreLikeThis> {
                       final isAdded = movieBookmarkState[movie['id']] ?? false;
                       return GestureDetector(
                         onTap: () {
-                          print(movie['id']);print(movie['rating']);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  MovieDetails(movieId: movie['id']),
+                              builder: (context) => MovieDetails(movieId: movie['id']),
                             ),
                           );
                         },
@@ -147,16 +145,16 @@ class _MoreLikeThisState extends State<MoreLikeThis> {
                                   ],
                                 ),
                                 Positioned(
-                                  top: 8.h,
-                                  left: 8.w,
+                                  top: 5.h,
+                                  left: 2.w,
                                   child: GestureDetector(
                                     onTap: () => toggleAddState(movie['id'], movie),
                                     child: Image.asset(
                                       isAdded
                                           ? AssetsManager.saveIcon
                                           : AssetsManager.addIcon,
-                                      height: 20.h,
-                                      width: 24.w,
+                                      height: 30.h,
+                                      width: 40.w,
                                       fit: BoxFit.contain,
                                     ),
                                   ),

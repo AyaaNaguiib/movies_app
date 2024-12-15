@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/core/assets_manager.dart';
 import 'package:movies_app/core/colors_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../API/categories_service.dart';
-import 'geners.dart';
+import '../../../../../cubits_states/geners_cubit.dart';
+import 'geners_Screen.dart';
 
 class BrowseCategoriesScreen extends StatefulWidget {
   const BrowseCategoriesScreen({Key? key}) : super(key: key);
@@ -14,12 +15,10 @@ class BrowseCategoriesScreen extends StatefulWidget {
 }
 
 class _BrowseCategoriesScreenState extends State<BrowseCategoriesScreen> {
-  late Future<List<Map<String, dynamic>>> genres;
-
   @override
   void initState() {
     super.initState();
-    genres = CategoryService.fetchGenres();
+    context.read<GenreCubit>().fetchGenres();
   }
 
   @override
@@ -34,15 +33,14 @@ class _BrowseCategoriesScreenState extends State<BrowseCategoriesScreen> {
           style: TextStyle(color: ColorsManager.white, fontSize: 20.sp),
         ),
       ),
-      body: FutureBuilder<List<Map<String, dynamic>>>(
-        future: genres,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+      body: BlocBuilder<GenreCubit, GenreState>(
+        builder: (context, state) {
+          if (state is GenreLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else {
-            final genreList = snapshot.data!;
+          } else if (state is GenreError) {
+            return Center(child: Text('Error: ${state.error}'));
+          } else if (state is GenreLoaded) {
+            final genreList = state.genres;
             return GridView.builder(
               padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -70,7 +68,8 @@ class _BrowseCategoriesScreenState extends State<BrowseCategoriesScreen> {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.r),
-                        child: Image.asset(AssetsManager.categoryItem,
+                        child: Image.asset(
+                          AssetsManager.categoryItem,
                           width: double.infinity,
                           height: double.infinity,
                           fit: BoxFit.cover,
@@ -97,6 +96,7 @@ class _BrowseCategoriesScreenState extends State<BrowseCategoriesScreen> {
               },
             );
           }
+          return const SizedBox();
         },
       ),
     );

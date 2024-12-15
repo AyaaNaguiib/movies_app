@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:movies_app/repo/moviemodel.dart';
+
+import 'moviemodel.dart';
 
 class WatchlistRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;

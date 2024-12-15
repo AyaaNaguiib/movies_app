@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/presentaions/screens/home/tabs/watchlist_screen/watchlist.dart';
-
 import '../presentaions/screens/home/home.dart';
 import '../presentaions/screens/home/tabs/search/search.dart';
 import '../presentaions/screens/splash_screen/splash.dart';
